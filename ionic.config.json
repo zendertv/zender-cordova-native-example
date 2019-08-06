@@ -1,0 +1,7 @@
+{
+  "name": "zender-cordova-native-example",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
