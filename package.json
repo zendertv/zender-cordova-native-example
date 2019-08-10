@@ -27,7 +27,7 @@
     "@ionic/storage": "^2.2.0",
     "cordova-android": "8.0.0",
     "cordova-ios": "^5.0.1",
-    "cordova-plugin-zenderplayer": "git+https://github.com/zendertv/cordova-plugin-zenderplayer.git#v0.0.1",
+    "cordova-plugin-zenderplayer": "git+https://github.com/zendertv/cordova-plugin-zenderplayer.git#feature-use-maven-repo",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
