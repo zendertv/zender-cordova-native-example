@@ -1,4 +1,4 @@
-# Cordova ZenderPlayer Example project
+# Ionic Cordova ZenderPlayer Example project
 
 
 ```
