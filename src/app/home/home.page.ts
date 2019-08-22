@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Device } from '@ionic-native/device/ngx';
 
 declare var ZenderPlayer:any ;
 
@@ -12,30 +13,53 @@ export class HomePage {
 
   zenderconfig = new Map();
 
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage , private device: Device) {
+
+  //this.zenderconfig["uuid"]=device.uuid;
+  //console.log(device.uuid);
 
   // Retrieve saved values
-  storage.get('targetId').then((val) => {
+  storage.get('zenderTargetId').then((val) => {
    this.zenderconfig["targetId"]=val;
   });
 
-  storage.get('channelId').then((val) => {
+  storage.get('zenderChannelId').then((val) => {
    this.zenderconfig["channelId"]=val;
   });
 
-  storage.get('environment').then((val) => {
+  storage.get('zenderEnvironment').then((val) => {
+   if (!val) {
+   this.zenderconfig["environment"]="production";
+	} else {
    this.zenderconfig["environment"]=val;
+    }
   });
 
-  storage.get('debugEnabled').then((val) => {
+  storage.get('zenderDebugEnabled').then((val) => {
+   if (!val) {
+   this.zenderconfig["debugEnabled"]=false;
+	} else {
    this.zenderconfig["debugEnabled"]=val;
+   }
   });
 
-  storage.get('environment').then((val) => {
-   this.zenderconfig["environment"]=val;
+  storage.get('zenderUsername').then((val) => {
+   if (!val) {
+   this.zenderconfig["username"]="demo";
+	} else {
+   this.zenderconfig["username"]=val;
+	}
   });
 
-  storage.get('deviceToken').then((val) => {
+  storage.get('zenderBackgroundColor').then((val) => {
+   if (!val) {
+   this.zenderconfig["backgroundColor"]="#ff00ff";
+	} else {
+   this.zenderconfig["backgroundColor"]=val;
+	}
+  });
+
+  storage.get('zenderDeviceToken').then((val) => {
    this.zenderconfig["deviceToken"]=val;
   });
 
@@ -58,18 +82,16 @@ export class HomePage {
 
     var authPayload = {
 	'token': 'test-user',
-	'name': 'patrick'
+	'name': this.zenderconfig["username"]
     };
 
     var config = {
 	debugEnabled: this.zenderconfig["debugEnabled"],
 	backgroundColor: this.zenderconfig["backgroundColor"],
+	environment: this.zenderconfig["environment"],
+        //deviceToken: 'userA'
+    	//redeemCode: 'userA'
     };
-
-    //redeemCode: 'userA'
-    //deviceToken: 'userA'
-    //userName: 'userA'
-    //uniqueId: 'testUser'
 
     ZenderPlayer.setConfig(config, function() {
     ZenderPlayer.setAuthentication(authProvider, authPayload , function() {
@@ -90,12 +112,14 @@ export class HomePage {
     console.log('saving debug:',this.zenderconfig["debug"]);
     console.log('saving environment:',this.zenderconfig["environment"]);
     console.log('saving username:',this.zenderconfig["username"]);
+    console.log('saving backgroundColor:',this.zenderconfig["backgroundColor"]);
 
-    this.storage.set('targetId',this.zenderconfig["targetId"]);
-    this.storage.set('channelId',this.zenderconfig["channelId"]);
-    this.storage.set('debugEnabled',this.zenderconfig["debugEnabled"]);
-    this.storage.set('environment',this.zenderconfig["environment"]);
-    this.storage.set('username',this.zenderconfig["username"]);
+    this.storage.set('zenderTargetId',this.zenderconfig["targetId"]);
+    this.storage.set('zenderChannelId',this.zenderconfig["channelId"]);
+    this.storage.set('zenderDebugEnabled',this.zenderconfig["debugEnabled"]);
+    this.storage.set('zenderEnvironment',this.zenderconfig["environment"]);
+    this.storage.set('zenderUsername',this.zenderconfig["username"]);
+    this.storage.set('zenderBackgroundcolor',this.zenderconfig["backgroundColor"]);
   }
 
 }

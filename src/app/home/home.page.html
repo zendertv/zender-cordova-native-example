@@ -26,11 +26,19 @@
   <ion-input [(ngModel)]="zenderconfig.username" name="username"></ion-input>
 </ion-item>
 
+<ion-item>
+  <ion-label>Background Color</ion-label>
+  <ion-input [(ngModel)]="zenderconfig.backgroundColor" name="backgroundColor"></ion-input>
+</ion-item>
 
 <ion-item>
-    <ion-label>Production</ion-label>
-    <ion-toggle [(ngModel)]="zenderconfig.environment" name="environment"></ion-toggle>
- </ion-item>
+    <ion-label>Environment</ion-label>
+    <ion-select [(ngModel)]="zenderconfig.environment" name="environment">
+
+	<ion-select-option value="production">production</ion-select-option>
+      <ion-select-option value="staging">staging</ion-select-option>
+    </ion-select>
+  </ion-item>
 
 <ion-item>
     <ion-label>Debug</ion-label>
