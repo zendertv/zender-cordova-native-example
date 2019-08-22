@@ -23,6 +23,22 @@ export class HomePage {
    this.zenderconfig["channelId"]=val;
   });
 
+  storage.get('environment').then((val) => {
+   this.zenderconfig["environment"]=val;
+  });
+
+  storage.get('debugEnabled').then((val) => {
+   this.zenderconfig["debugEnabled"]=val;
+  });
+
+  storage.get('environment').then((val) => {
+   this.zenderconfig["environment"]=val;
+  });
+
+  storage.get('deviceToken').then((val) => {
+   this.zenderconfig["deviceToken"]=val;
+  });
+
   }
 
   public openZenderPlayer() {
@@ -45,10 +61,22 @@ export class HomePage {
 	'name': 'patrick'
     };
 
+    var config = {
+	debugEnabled: this.zenderconfig["debugEnabled"],
+	backgroundColor: this.zenderconfig["backgroundColor"],
+    };
+
+    //redeemCode: 'userA'
+    //deviceToken: 'userA'
+    //userName: 'userA'
+    //uniqueId: 'testUser'
+
+    ZenderPlayer.setConfig(config, function() {
     ZenderPlayer.setAuthentication(authProvider, authPayload , function() {
     ZenderPlayer.setTargetId(targetId, function() { 
     ZenderPlayer.setChannelId(channelId, function() {
     ZenderPlayer.start(function() { 
+     } , function(err) { console.log(err)});
      } , function(err) { console.log(err)});
      } , function(err) { console.log(err)});
      } , function(err) { console.log(err)});
@@ -59,9 +87,15 @@ export class HomePage {
   saveConfig() {
     console.log('saving targetId :', this.zenderconfig["targetId"]);
     console.log('saving channelId:',this.zenderconfig["channelId"]);
+    console.log('saving debug:',this.zenderconfig["debug"]);
+    console.log('saving environment:',this.zenderconfig["environment"]);
+    console.log('saving username:',this.zenderconfig["username"]);
 
     this.storage.set('targetId',this.zenderconfig["targetId"]);
     this.storage.set('channelId',this.zenderconfig["channelId"]);
+    this.storage.set('debugEnabled',this.zenderconfig["debugEnabled"]);
+    this.storage.set('environment',this.zenderconfig["environment"]);
+    this.storage.set('username',this.zenderconfig["username"]);
   }
 
 }

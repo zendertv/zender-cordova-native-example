@@ -21,11 +21,20 @@
   <ion-input [(ngModel)]="zenderconfig.channelId" name="channelId"></ion-input>
 </ion-item>
 
+<ion-item>
+  <ion-label>Username</ion-label>
+  <ion-input [(ngModel)]="zenderconfig.username" name="username"></ion-input>
+</ion-item>
 
 
 <ion-item>
     <ion-label>Production</ion-label>
-    <ion-toggle [(ngModel)]="zenderconfig.enviroment" name="environment"></ion-toggle>
+    <ion-toggle [(ngModel)]="zenderconfig.environment" name="environment"></ion-toggle>
+ </ion-item>
+
+<ion-item>
+    <ion-label>Debug</ion-label>
+    <ion-toggle [(ngModel)]="zenderconfig.debugEnabled" name="debugEnabled"></ion-toggle>
  </ion-item>
 
       <button ion-button type="submit" block>Save</button>
